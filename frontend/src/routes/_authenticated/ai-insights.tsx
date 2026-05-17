@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Topbar } from "@/components/layout/Topbar";
 import { insightService } from "@/services/insight.service";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Sparkles, Lightbulb, PiggyBank, ShieldAlert, FileText } from "lucide-react";
+import { Sparkles, Lightbulb, PiggyBank, ShieldAlert, FileText, RefreshCcw, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/ai-insights")({
@@ -19,7 +20,7 @@ const KIND_META = {
 } as const;
 
 function InsightsPage() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["insights"],
     queryFn: insightService.list,
   });
@@ -44,7 +45,10 @@ function InsightsPage() {
     <div>
       <Topbar title="AI Insights" subtitle="Smart analysis tuned to your spending DNA" />
       <div className="px-6 lg:px-8 py-6 space-y-6">
-        <div className="glass rounded-2xl p-6 shadow-card relative overflow-hidden">
+        <Link 
+          to="/reports"
+          className="block glass rounded-2xl p-6 shadow-card relative overflow-hidden group hover:border-primary/40 transition-colors cursor-pointer"
+        >
           <div
             className="absolute -top-20 -right-10 h-72 w-72 rounded-full opacity-25 blur-3xl"
             style={{ background: "var(--gradient-brand)" }}
@@ -53,7 +57,7 @@ function InsightsPage() {
             <div className="h-12 w-12 rounded-2xl bg-gradient-brand grid place-items-center shadow-glow shrink-0">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
-            <div>
+            <div className="flex-1">
               <h2 className="text-xl font-semibold font-display">
                 Your monthly AI report is ready
               </h2>
@@ -63,8 +67,22 @@ function InsightsPage() {
                   : "Add some expenses to get personalized AI insights and recommendations."}
               </p>
             </div>
+            <Button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                refetch();
+              }} 
+              variant="outline" 
+              size="sm" 
+              className="shrink-0 bg-white/50 backdrop-blur-md shadow-sm border-white/20" 
+              disabled={isFetching || isLoading}
+            >
+              {isFetching || isLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <RefreshCcw className="h-4 w-4 mr-2" />}
+              {isFetching || isLoading ? "Generating..." : "Refresh Insights"}
+            </Button>
           </div>
-        </div>
+        </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {isLoading

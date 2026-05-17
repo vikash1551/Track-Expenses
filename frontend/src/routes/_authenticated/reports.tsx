@@ -14,6 +14,7 @@ import {
 import { Topbar } from "@/components/layout/Topbar";
 import { expenseService } from "@/services/expense.service";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Lightbulb } from "lucide-react";
 import { fmtCurrency } from "@/utils/format";
 
 export const Route = createFileRoute("/_authenticated/reports")({
@@ -59,6 +60,27 @@ function ReportsPage() {
     <div>
       <Topbar title="Reports" subtitle="Historical performance and category breakdowns" />
       <div className="px-6 lg:px-8 py-6 space-y-6">
+        
+        {!isLoading && byCat.length > 0 && (
+          <div className="glass rounded-2xl p-6 shadow-card border-l-4 border-l-primary relative overflow-hidden animate-fade-up">
+            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+              <Lightbulb className="h-24 w-24" />
+            </div>
+            <div className="flex items-start gap-4 relative z-10">
+              <div className="h-10 w-10 rounded-xl bg-primary/10 grid place-items-center shrink-0">
+                <Lightbulb className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Top Spending Area: {byCat[0].category}</h3>
+                <p className="text-sm text-muted-foreground mt-1 max-w-2xl leading-relaxed">
+                  You spent the most on <strong className="text-foreground">{byCat[0].category}</strong> ({fmtCurrency(byCat[0].total)}). 
+                  To minimize this, try setting a stricter budget limit for {byCat[0].category.toLowerCase()}, tracking daily purchases before they add up, and actively looking for cheaper alternatives this month.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="glass rounded-2xl p-5 shadow-card">
             <div className="flex items-center justify-between mb-4">

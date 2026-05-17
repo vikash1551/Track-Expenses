@@ -20,7 +20,7 @@ export function MobileNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-border pb-safe">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-primary pb-safe text-primary-foreground shadow-[0_-4px_10px_rgba(0,0,0,0.1)]">
       <nav className="flex items-center justify-around px-2 py-2">
         {mobileNav.map((item) => {
           const Icon = item.icon;
@@ -32,14 +32,14 @@ export function MobileNav() {
               className={cn(
                 "flex flex-col items-center justify-center w-16 h-12 gap-1 rounded-xl transition-all",
                 active
-                  ? "text-primary font-medium"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-primary-foreground font-semibold"
+                  : "text-primary-foreground/60 hover:text-primary-foreground"
               )}
             >
               <div
                 className={cn(
                   "flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300",
-                  active ? "bg-primary/10" : "bg-transparent"
+                  active ? "bg-white/20" : "bg-transparent"
                 )}
               >
                 <Icon className="h-5 w-5" />

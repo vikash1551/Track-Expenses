@@ -32,10 +32,10 @@ export function AppSidebar() {
   return (
     <aside className="hidden md:flex flex-col w-64 shrink-0 h-screen sticky top-0 border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
       <div className="px-6 py-5 flex items-center gap-2.5">
-        <div className="h-9 w-9 rounded-xl bg-gradient-brand shadow-glow grid place-items-center">
-          <span className="font-display font-bold text-primary-foreground text-lg">F</span>
+        <div className="h-8 w-8 rounded-lg shadow-glow shrink-0 overflow-hidden">
+          <img src="/logo.png" alt="Track Expense" className="h-full w-full object-cover" />
         </div>
-        <div>
+        <div className="flex-1 min-w-0">
           <div className="font-display font-semibold text-base leading-none">Track Expense</div>
           <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
             AI Finance OS

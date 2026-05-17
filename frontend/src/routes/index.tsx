@@ -22,15 +22,15 @@ function HomePage() {
       <div className="absolute inset-0 -z-10 opacity-50 [background:radial-gradient(55%_45%_at_50%_40%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent_70%)]" />
 
       {/* Logo */}
-      <Link to="/" className="flex items-center gap-2.5 mb-10">
-        <div className="h-11 w-11 rounded-xl bg-gradient-brand shadow-glow grid place-items-center">
-          <span className="font-display font-bold text-primary-foreground text-xl">F</span>
-        </div>
-        <div className="leading-none">
-          <div className="font-display font-semibold text-lg">Track Expense</div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
-            Expense Tracker
+      <Link to="/" className="flex flex-col items-center gap-2.5 mb-10">
+        <div className="flex items-center gap-2 font-semibold">
+          <div className="h-8 w-8 rounded-lg shadow-glow overflow-hidden">
+            <img src="/logo.png" alt="Track Expense" className="h-full w-full object-cover" />
           </div>
+          <div className="font-display font-semibold text-lg">Track Expense</div>
+        </div>
+        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          Expense Tracker
         </div>
       </Link>
 

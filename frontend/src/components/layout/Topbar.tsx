@@ -1,4 +1,4 @@
-import { Search, Bell, ArrowLeft, IndianRupee, Wallet, X } from "lucide-react";
+import { Search, Bell, IndianRupee, Wallet, X } from "lucide-react";
 import { Link, useRouter, useNavigate } from "@tanstack/react-router";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -107,13 +107,7 @@ export function Topbar({ title, subtitle }: TopbarProps) {
     return () => document.removeEventListener("keydown", handleKey);
   }, []);
 
-  const handleBack = () => {
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      window.history.back();
-    } else {
-      router.navigate({ to: "/dashboard" });
-    }
-  };
+
 
   const handleResultClick = (result: SearchResult) => {
     setIsOpen(false);
@@ -122,21 +116,14 @@ export function Topbar({ title, subtitle }: TopbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-xl bg-background/70 border-b border-border">
+    <header className="sticky top-0 z-30 md:backdrop-blur-xl md:bg-background/70 bg-primary text-primary-foreground md:text-foreground md:border-b md:border-border shadow-sm md:shadow-none">
       <div className="flex items-center gap-4 px-6 lg:px-8 py-4">
-        <button
-          type="button"
-          onClick={handleBack}
-          aria-label="Go back"
-          className="h-9 w-9 grid place-items-center rounded-lg border border-border hover:bg-secondary transition-colors shrink-0"
-        >
-          <ArrowLeft className="h-4 w-4" />
-        </button>
+
 
         <div className="flex-1 min-w-0">
           <h1 className="text-xl md:text-2xl font-semibold tracking-tight truncate">{title}</h1>
           {subtitle && (
-            <p className="text-sm text-muted-foreground truncate mt-0.5">{subtitle}</p>
+            <p className="text-sm text-primary-foreground/80 md:text-muted-foreground truncate mt-0.5">{subtitle}</p>
           )}
         </div>
 
@@ -191,11 +178,10 @@ export function Topbar({ title, subtitle }: TopbarProps) {
                       className="w-full flex items-center gap-3 px-3 py-3 hover:bg-secondary/50 transition-colors text-left border-b border-border last:border-0"
                     >
                       <div
-                        className={`h-9 w-9 rounded-lg grid place-items-center shrink-0 ${
-                          r.type === "expense"
+                        className={`h-9 w-9 rounded-lg grid place-items-center shrink-0 ${r.type === "expense"
                             ? "bg-primary/10 text-primary"
                             : "bg-info/10 text-info"
-                        }`}
+                          }`}
                       >
                         {r.type === "expense" ? (
                           <IndianRupee className="h-4 w-4" />
@@ -215,11 +201,10 @@ export function Topbar({ title, subtitle }: TopbarProps) {
                         {r.type === "expense" ? `−${r.amount}` : r.amount}
                       </div>
                       <span
-                        className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                          r.type === "expense"
+                        className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${r.type === "expense"
                             ? "bg-primary/10 text-primary"
                             : "bg-info/10 text-info"
-                        }`}
+                          }`}
                       >
                         {r.type === "expense" ? "Expense" : "Budget"}
                       </span>
@@ -233,11 +218,11 @@ export function Topbar({ title, subtitle }: TopbarProps) {
 
         <Link
           to="/notifications"
-          className="relative h-9 w-9 grid place-items-center rounded-lg border border-border hover:bg-secondary transition-colors"
+          className="relative h-9 w-9 grid place-items-center rounded-lg border border-primary-foreground/20 md:border-border hover:bg-primary-foreground/10 md:hover:bg-secondary transition-colors"
           aria-label="Notifications"
         >
           <Bell className="h-4 w-4" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-white md:bg-primary" />
         </Link>
       </div>
     </header>

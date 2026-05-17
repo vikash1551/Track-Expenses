@@ -180,8 +180,8 @@ export function BrandPanel() {
       <div className="absolute -bottom-32 -left-20 h-[380px] w-[380px] rounded-full opacity-10 blur-3xl bg-white" />
 
       <div className="relative flex items-center gap-2.5">
-        <div className="h-10 w-10 rounded-xl bg-white grid place-items-center shadow-card">
-          <span className="font-display font-bold text-primary">F</span>
+        <div className="h-10 w-10 rounded-xl bg-white grid place-items-center shadow-card overflow-hidden">
+          <img src="/logo.png" alt="Track Expense" className="h-full w-full object-cover" />
         </div>
         <div>
           <div className="font-display font-semibold">Track Expense</div>

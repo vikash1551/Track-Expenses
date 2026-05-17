@@ -51,7 +51,7 @@ public class AiAdvisorService {
         // --- REAL OPENAI CALL (Only runs if you put a real key in application.properties) ---
         String prompt = String.format(
             "You are an expert financial advisor. The user is from India and uses Indian Rupees (₹). They have a total budget of ₹%.2f and has spent ₹%.2f this month. " +
-            "Their expenses are: %s. Give them a 2-sentence financial insight or warning. Always use ₹ symbol for amounts.",
+            "Their expenses are: %s. Give them 2 actionable, highly specific tips on how to save money based on their exact spending categories. Keep it brief. Always use the ₹ symbol for amounts.",
             totalBudget, totalSpent, expenses.toString()
         );
 
@@ -80,15 +80,10 @@ public class AiAdvisorService {
 
     // Our local "AI" logic
     private String generateMockInsight(double budget, double spent) {
-        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-        String fmtBudget = nf.format(budget);
-        String fmtSpent = nf.format(spent);
-        String fmtOver = nf.format(spent - budget);
-
-        if (budget == 0) return "🤖 AI: You haven't set a budget yet! Let's get that setup first.";
-        if (spent > budget) return "🤖 AI: Whoops! You've exceeded your budget by " + fmtOver + ". Time to cut back on spending for the rest of the month.";
-        if (spent > budget * 0.8) return "🤖 AI: Careful! You've used over 80% of your budget. Watch those impulse purchases.";
+        if (budget == 0) return "💡 Tip: You haven't set a budget yet! Setting a strict budget is the first step to saving money.";
+        if (spent > budget) return "💡 Tip: You are over budget! To save money next month, try using the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings.";
+        if (spent > budget * 0.8) return "💡 Tip: You're close to your limit. Save money by cooking at home this week and avoiding non-essential online shopping.";
         
-        return "🤖 AI: Looking good! You've spent " + fmtSpent + " out of your " + fmtBudget + " budget. Keep up the great financial habits!";
+        return "💡 Tip: You're doing great! Consider transferring your remaining budget into a high-yield savings account or mutual fund at the end of the month.";
     }
 }
