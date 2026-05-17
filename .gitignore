@@ -1,0 +1,25 @@
+# ============================
+# Root .gitignore — Track Expense
+# ============================
+
+# IDE / Editor
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Gemini / AI tooling
+.gemini/
+.antigravityignore
+
+# Environment files
+.env
+.env.*
+*.local
