@@ -22,8 +22,9 @@ public class EmailService {
     // Sends an email via SMTP
     public void sendOtpEmail(String to, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("Track Expense <vikashkumar221005@gmail.com>");
         message.setTo(to);
-        message.setSubject("Your FinFlow Security Code");
+        message.setSubject("Your Track Expense Security Code");
         message.setText("Your OTP is [ " + otp + " ]. It expires in 5 minutes.");
         
         try {
