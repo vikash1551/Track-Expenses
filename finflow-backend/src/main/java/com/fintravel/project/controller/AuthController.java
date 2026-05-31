@@ -79,6 +79,18 @@ public class AuthController {
         return "Invalid or expired OTP.";
     }
 
+    // Temporary endpoint to bypass email verification if SMTP is broken
+    @GetMapping("/force-verify")
+    public String forceVerify(@RequestParam String email) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user != null) {
+            user.setIsEmailVerified(true);
+            userRepository.save(user);
+            return "Email forcefully verified for " + email + ". You can now log in!";
+        }
+        return "User not found.";
+    }
+
     // --- LOGIN FLOW ---
 
     // Step 1: Verify Password and Send OTP

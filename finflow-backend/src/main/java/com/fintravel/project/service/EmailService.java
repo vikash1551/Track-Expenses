@@ -27,12 +27,7 @@ public class EmailService {
         message.setSubject("Your Track Expense Security Code");
         message.setText("Your OTP is [ " + otp + " ]. It expires in 5 minutes.");
         
-        try {
-            mailSender.send(message);
-            System.out.println("✅ OTP successfully sent to email: " + to);
-        } catch (Exception e) {
-            System.err.println("❌ Failed to send OTP to email: " + to);
-            e.printStackTrace();
-        }
+        mailSender.send(message);
+        System.out.println("✅ OTP successfully sent to email: " + to);
     }
 }
