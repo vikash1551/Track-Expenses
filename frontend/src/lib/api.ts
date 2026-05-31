@@ -9,7 +9,7 @@ const baseURL =
 export const api = axios.create({
   baseURL,
   headers: { "Content-Type": "application/json" },
-  timeout: 15000,
+  timeout: 60000, // 60 seconds to allow Render free tier to wake up
 });
 
 api.interceptors.request.use((config) => {
